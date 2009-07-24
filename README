@@ -1,0 +1,10 @@
+The jqDjangoGrid is a jquery's plugin and django app to produce a datagrid easily.
+See more information in http://www.gustavohenrique.net/brogui
+
+AUTHOR: Gustavo Henrique
+E-MAIL: gustavo@gustavohenrique.net
+
+
+*******************************************
+MOVE THE js AND css DIR TO YOUR MEDIA_ROOT
+*******************************************
