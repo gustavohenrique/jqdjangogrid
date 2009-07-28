@@ -18,20 +18,21 @@ def datagrid(request):
         P = request.POST
 
         # info to mount queryset
-        model = get_model(P.get('app_label'), P.get('model_name'))
-        cols = eval(P.get('_str_cols'))
+        model = get_model(P.get('appLabel'), P.get('modelName'))
+        cols = eval(P.get('_strCols'))
         order = P.get('order')
         if '.' in order: order = order.split('.')[0]
 
         if P.get('_filter'):
             filter = P.get('_filter')
         else:
-            filter = P.get('initial_filter')
+            filter = P.get('initialFilter')
+
 
         # the page
-        page = int(P.get('page'))
+        page = int(P.get('_page'))
         try:
-            show_per_page = int(P.get('show_per_page'))
+            show_per_page = int(P.get('numItensPerPage'))
         except:
             show_per_page = 10
 
