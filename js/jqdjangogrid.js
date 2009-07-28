@@ -1,34 +1,35 @@
-/**
-  * @fileoverview The jqDjangoGrid is a jquery's plugin and django app to produce a datagrid easily.
-  *
-  * @author Gustavo Henrique, gustavo@gustavohenrique.net
-  * @homepage http://www.gustavohenrique.net/jqdjangogrid
-  * @version 0.2
-  *
-  * @example:
-  * $(function() {
-  *    $('#datagrid_client').datagrid({
-  *      'appLabel': 'client',
-  *      'modelName': 'Client',
-  *      'cols': {
-  *          "pk": {"label": "", "width": "10px"},
-  *          "name": {"label": "Nome", "width": "300px"},
-  *      },
-  *      'buttons': {
-  *          "bt_add": {"type": "button", "label": "New", "onclick": "myfunc()" },
-  *      },
-  *      'initialFilter': 'pk__gt=0',
-  *      'numItensPerPage': 10,
-  *      'canShowGenericButtonDelete': true,
-  *    });
-  *  });
-  */
+/*
+ * The jqDjangoGrid is a jquery's plugin and django app to produce a datagrid easily.
+ *
+ * @link http://www.gustavohenrique.net/jqdjangogrid
+ * @author Gustavo Henrique gustavo@gustavohenrique.net
+ * @version 0.2
+ *
+ * @example:
+ * $(function() {
+ *    $('#datagrid_client').datagrid({
+ *      'appLabel': 'client',
+ *      'modelName': 'Client',
+ *      'cols': {
+ *          "pk": {"label": "", "width": "10px"},
+ *          "name": {"label": "Nome", "width": "300px"},
+ *      },
+ *      'buttons': {
+ *          "bt_add": {"type": "button", "label": "New", "onclick": "myfunc()" },
+ *      },
+ *      'initialFilter': 'pk__gt=0',
+ *      'numItensPerPage': 10,
+ *      'canShowGenericButtonDelete': true,
+ *    });
+ *  });
+ */
 
 
-/**
-  * Return the pk of the selected object.
-  * If not have some selected data the result is zero.
-  */
+/*
+ * Return the pk of the selected object.
+ * If not have some selected data the result is zero.
+ * @return The PK of selected object
+ */
 function getDatagridSelected() {
     if ($('.form_datagrid:parent :input:radio:checked').val())
         return $('.form_datagrid:parent :input:radio:checked').val();
@@ -44,26 +45,30 @@ function getDatagridSelected() {
 
 (function($) {
 
-/**
-  * The main method.
-  */
+/*
+ * The main method.
+ * @param {array} settings A pair of key/value.
+ */
 $.fn.datagrid = function(settings) {
 
-    /**
-      * Properties of the datagrid
-      * the variable "s" is extended from "settings"
-      */
+    /*
+     * Properties of the datagrid
+     * the variable "s" is extended from "settings"
+     * @extends $.fn.datagrid.defaults
+     */
     var s = $.extend({}, $.fn.datagrid.defaults, settings);
 
     // Apply initial filter
     s._filter = s.initialFilter;
 
-    // dgrid class contains the methods and attributes
+    /*
+     * @class dgrid class contains the methods and attributes
+     */
     var dgrid = {
-        /**
-          * Creates the datagrid's structure using tables.
-          * target is a html object.
-          */
+        /*
+         * Creates the datagrid's structure using tables.
+         * target is a html object.
+         */
         createDatagrid: function(target) {
             s._datagridId = target.id;
             s._div = $(target);
@@ -130,9 +135,9 @@ $.fn.datagrid = function(settings) {
             // Insert datagrid in document
             s._div.append(html);
 
-            /**
-              * Add events
-              */
+            /*
+             * Add events
+             */
 
             // Sort the data according to the column selected.
             $('#'+s._datagridId+'_table_datagrid .head,#'+s._datagridId+'_table_datagrid .asc, #'+s._datagridId+'_table_datagrid .desc').click(function() { dgrid.sorter($(this)); });
@@ -156,9 +161,9 @@ $.fn.datagrid = function(settings) {
             this.fillDatagrid();
         },
 
-        /**
-          * Fill the datagrid
-          */
+        /*
+         * Fill the datagrid
+         */
         fillDatagrid: function() {
             columns = ''
             $.each(s.cols, function(k, v) {
@@ -214,9 +219,9 @@ $.fn.datagrid = function(settings) {
 
         },
 
-        /**
-          * Sort the datagrid result according the cols clicked.
-          */
+        /*
+         * Sort the datagrid result according the cols clicked.
+         */
         sorter: function(td) {
             var td_class, order = $(td).attr('title');
             td_class = $(td).attr('class');
@@ -235,10 +240,10 @@ $.fn.datagrid = function(settings) {
             dgrid.fillDatagrid();
         },
 
-        /**
-          * Replaces %s in the searchFilter for the value typed and refreshes
-          * the datagrid with the results of the search.
-          */
+        /*
+         * Replaces %s in the searchFilter for the value typed and refreshes
+         * the datagrid with the results of the search.
+         */
         fastSearch: function(value) {
             if (value && value != '' && value != 'Find...') {
                 filter = s.searchFilter;
@@ -248,10 +253,10 @@ $.fn.datagrid = function(settings) {
             dgrid.fillDatagrid();
         },
 
-        /**
-          * Going to page specified by user.
-          * This methdo allow only numbers in the input text object.
-          */
+        /*
+         * Going to page specified by user.
+         * This methdo allow only numbers in the input text object.
+         */
         goToPage: function(event, value) {
             var KEYS_ALLOWED = {
                  8 : 'BACKSPACE',
@@ -292,9 +297,9 @@ $.fn.datagrid = function(settings) {
                     return false;
         },
 
-        /**
-          * A generic method for deletion of the objects in django.
-          */
+        /*
+         * A generic method for deletion of the objects in django.
+         */
         genericDatagridDelete: function() {
             pk = getDatagridSelected();
             if (pk > 0) {
