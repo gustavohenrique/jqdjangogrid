@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>jqDjangoGrid Example</title>
+
+<link rel="StyleSheet" href="{{ MEDIA_URL }}/css/themes/default/jqdjangogrid.css" type="text/css">
+
+<script language="JavaScript" type="text/javascript" src="{{ MEDIA_URL }}/js/jquery.js"></script>
+<script language="JavaScript" type="text/javascript" src="{{ MEDIA_URL }}/js/jqdjangogrid.js"></script>
+
+<style type="text/css">
+body {
+  font-size: 12pt;
+  font-family: Arial, helvetica, sans-serif;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#example').datagrid({
+        'appLabel': 'bookmark',
+        'modelName': 'Bookmark',
+        'cols': {
+            "pk": {"label": "", "width":"10px"},
+            "site_name": {"label": "Nome", "width": "100px"},
+            "site_url": {"label": "URL", "width": "300px;"},
+            "category": {"label": "Categoria", "width": "100px"},
+        },
+        'searchFilter': 'site_name__icontains="%s"',
+        'buttons': {
+            "btAlert": {"type": "button", "label": "Show PK", "onclick": "alert('The PK='+getDatagridSelected())"},
+        },
+        'canShowGenericButtonDelete': true,
+    });
+});
+</script>
+</head>
+
+<body>
+
+<div align="center">
+    <p><b>jqDjangoGrid</b> basic example:</p>
+    <div id="example" style="width:90%"></div>
+</div>
+
+</body>
+</html>

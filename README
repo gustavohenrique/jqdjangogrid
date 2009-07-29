@@ -5,6 +5,8 @@ AUTHOR: Gustavo Henrique
 E-MAIL: gustavo@gustavohenrique.net
 
 
+See 'jqdg' django app in the example dir.
+
 *******************************************
 MOVE THE js AND css DIR TO YOUR MEDIA_ROOT
 *******************************************
