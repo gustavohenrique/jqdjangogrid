@@ -200,7 +200,7 @@ $.fn.datagrid = function(settings) {
                     for (var i=0; i<item.queryset.length; i++) {
                         var q = item.queryset[i];
                         if (i % 2) row = 'row2'; else row = 'row1';
-                        $('#'+s._datagridId+'_table_datagrid > tbody').append('<tr class="'+row+'" onmouseover="$(this).attr(\'class\',\'row0\')" onmouseout="$(this).attr(\'class\',\''+row+'\')" onclick="$(\'#'+s._datagridId+'_datagrid_row_pk_'+i+'\').attr(\'checked\',\'checked\')">');
+                        $('#'+s._datagridId+'_table_datagrid > tbody').append('<tr class="'+row+'" onmouseover="$(this).attr(\'class\',\'row0\')" onmouseout="$(this).attr(\'class\',\''+row+'\')" onclick="$(\'#'+s._datagridId+'_datagrid_row_pk_'+i+'\').attr(\'checked\',\'checked\'); '+s.tdExtraClick+'">');
 
                         // If the column name is "pk", show a radiobox
                         $.each(s.cols, function(k, v) {
@@ -392,6 +392,9 @@ $.fn.datagrid.defaults = {
 
     // Buttons in the navigation bar
     buttons: {},
+
+    // A extra function to execute when td is clicked
+    tdExtraClick: '',
 
     // Private attribute contains the id of element container
     _div: '',
