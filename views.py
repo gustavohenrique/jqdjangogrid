@@ -84,7 +84,7 @@ def delete(request):
         try:
             P = request.POST
             pk = int(P.get('pk'))
-            model = get_model(P.get('app_label'), P.get('model_name'))
+            model = get_model(P.get('appLabel'), P.get('modelName'))
             model.objects.get(pk=pk).delete()
             status = 'ok'
         except:
